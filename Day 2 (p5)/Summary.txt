@@ -1,0 +1,56 @@
+HNMI – Day 2: Exploring p5.js for creative interaction
+In our second HNMI session, we explored p5.js, a JavaScript library for creative coding that makes it easy to create visual and interactive experiences. We started by experimenting with basic shapes and movements through simple code. One example involved generating ellipses, lines, and points that responded dynamically to the mouse position and created continuous motion on the canvas, using the following code:
+
+var move = 0;
+
+function setup(){
+  createCanvas(400,400);
+  background(0,100,100);
+}
+
+function draw() {
+  fill(200,200,0);
+  point(mouseX,random(0,400));
+  line(0,0,200,400);
+  strokeWeight(10);
+  ellipse(50, 100, 80, 80);
+  noFill();
+  ellipse(300, move, 100, 300, 0);
+
+  move = move + 1;
+}
+
+Later, we introduced sound interaction by using the microphone as an input device. We developed a project where sound levels controlled expanding waves, creating a visual representation of audio data. Here’s the code we used:
+
+
+let mic;
+let waves = [];
+
+function setup() {
+  createCanvas(400, 400);
+  mic = new p5.AudioIn();
+  mic.start();
+}
+
+function draw() {
+  background(0, 20);
+  let vol = mic.getLevel();
+  let radius = map(vol, 0, 1, 10, 200);
+
+  waves.push(radius);
+  noFill();
+  stroke(0, 255, 0);
+  strokeWeight(2);
+
+  translate(width / 2, height / 2);
+  for (let i = waves.length - 1; i >= 0; i--) {
+    ellipse(0, 0, waves[i] * 2);
+    waves[i] += 1;
+    if (waves[i] > 300) {
+      waves.splice(i, 1);
+    }
+  }
+}
+
+Reflection:
+This session made us reflect on how even the simplest inputs can create engaging digital interactions. Using p5.js opened up many possibilities for merging sensory data with visual expression, pushing us to think about how I can apply these tools in future projects involving the body and its responses.
