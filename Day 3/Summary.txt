@@ -1,0 +1,66 @@
+HNMI – Day 3: Serial Communication and Time-based Interaction
+In our third HNMI session, we explored serial communication between Arduino and p5.js, enabling real-time interaction between hardware sensors and digital visuals. Using the Web Serial library, we created a project where a pressure sensor controlled the size and color of a circle on the screen. This allowed us to experiment with how physical inputs could alter digital outputs dynamically. One of our examples included a psychedelic effect with random colors based on sensor values.
+
+js
+Copy
+Edit
+// Code for sensor-controlled circle with changing colors
+let port;
+let lecture = 0;
+let val = 0;
+let connectBtn;
+let diameter;
+let myColor;
+let colorB;
+
+function setup() {
+  createCanvas(400, 400);
+  port = createSerial();
+  connectBtn = createButton("Connect Serial");
+  connectBtn.position(290, 370);
+  connectBtn.mousePressed(connectBtnClick);
+  colorB=color("#0DF0AB");
+}
+
+function draw() {
+  readingSerial();
+  serialConnected();
+  background(colorB);
+  if (val>400) { colorB=color("#782CEF"); } 
+  else { colorB=color("#0DF0AB"); }
+  myColor= map(val,0,450,0,255);
+  diameter=map(val,0,450,0,150);
+  circle(width/2,height/2,diameter);
+  if (val>350){ fill (random(0,255),random(0,255),random(0,255)); } 
+  else { fill (myColor,0,0); }
+}
+We also explored using millis() to measure time intervals in p5.js. This allowed us to create a program that tracked one minute of activity, drawing circles every second and saving snapshots of the canvas using keyboard input.
+
+js
+Copy
+Edit
+// Code for tracking time and saving canvas
+let prevTime, actualTime, x, y, counter;
+
+function setup() {
+  createCanvas(640, 400);
+  prevTime=millis(); x=20; y=20; counter=0;
+}
+
+function draw() {
+  actualTime=millis();
+  if ((actualTime-prevTime) >= 1000) {
+    prevTime=actualTime; x=x+10; counter++;
+  }
+  if (counter==60) { counter=0; x=20; y=y+10; }
+  fill (random(0,255),random(0,255),random(0,255));
+  circle(x,y,10);
+}
+
+function keyPressed(){
+  if(key=="s"){ save("myData"+frameCount+".png"); }
+}
+Finally, we combined time tracking with our pressure sensor input, allowing the size of drawn shapes to respond to both elapsed time and sensor data in real-time.
+
+Reflection:
+This session highlighted how hardware and software can work together to create interactive experiences. Connecting Arduino to p5.js expanded the possibilities of using body data for digital expression, inspiring me to explore further ways of integrating sensors into my design space.
