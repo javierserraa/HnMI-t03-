@@ -1,0 +1,74 @@
+### *HnMI Workshop - Day 1 Summary*
+
+Today we explored the intersection of the *human body, data, and technology* through the lens of *embodiment, biometrics, and creative coding. The session focused on understanding the body not just as a biological entity, but as a **medium, a tool for expression, and even as data itself*.
+
+#### *Key Concepts Covered:*
+- *The Body:* Discussed as both a tool for expression and a topic of study, navigating the tension between *science vs. culture* and *body vs. mind*.
+- *Phenomenalism:* The idea that our lived experiences shape our identities.
+- *Body as a Social Construction:* How both physical and digital presences influence how we perceive ourselves and others.
+- *Claiming Data:* Data can be a source of *joy, liberation, and self-awareness* rather than just surveillance.
+- *Small Data vs. Big Data:* Focusing on intimate, personal data collected from our own bodies.
+
+#### *Hands-on Prototyping:*
+We built *DIY soft pressure sensors* using:
+- *Velostat* (acts as a variable resistor based on pressure)
+- *Conductive materials* to allow current flow
+- *Arduino* for data acquisition
+
+*Sensor Structure:*
+- Layer 1: Conductive Material
+- Layer 2: Velostat (pressure-sensitive)
+- Layer 3: Conductive Material
+
+#### *Arduino Code for Sensor Reading:*
+cpp
+int sensorPin = A0;
+int sensorValue;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(sensorPin, INPUT);
+}
+
+void loop() {
+  sensorValue = analogRead(sensorPin);
+  Serial.println(sensorValue);
+  delay(1000);
+}
+
+This code reads the analog signal from the pressure sensor and sends the data to the serial monitor.
+
+#### *Data Visualization with Processing:*
+java
+import processing.serial.*;
+
+Serial mySerial;
+String myString;
+int nl = 10;
+float myVal;
+
+void setup() {
+  size(800, 600); // Canvas size
+  printArray(Serial.list()); // List available ports
+  delay(1000);
+  String myPort = Serial.list()[0]; // Select the first available port
+  mySerial = new Serial(this, myPort, 9600);
+}
+
+void draw() {
+  while (mySerial.available() > 0) {
+    myString = mySerial.readStringUntil(nl);
+    background(125, 0, 125);
+    if (myString != null) {
+      myVal = float(myString);
+      println(myVal);
+      circle(width / 2, height / 2, myVal);
+      smooth();
+    }
+  }
+}
+
+This code visualizes the pressure data as a dynamic circle that changes size based on the sensor input.
+
+#### *Reflection:*
+Today’s workshop highlighted how our bodies generate data naturally through movement, pressure, and emotion. We explored how to *capture, visualize, and interpret this data* creatively, bridging the gap between physical sensation and digital representation.
