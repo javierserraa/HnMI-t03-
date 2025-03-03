@@ -1,0 +1,17 @@
+Hand-Motion Synth Orchestra – HNMI Workshop
+For our final project in the HNMI workshop, our group decided to explore music interaction using P5.js. We started with a simple theremin-like digital instrument, where moving the mouse controlled the frequency and volume of an oscillator. Our first goal was to replace the mouse input with hand tracking, making the interaction more intuitive and performative.
+
+Phase 1: Hand Tracking Implementation
+We integrated ML5.js HandPose, focusing on tracking the index fingers of both hands. Initially, one index finger replaced the mouse movement, allowing us to control pitch and volume. Then, we introduced a second index finger as a modifier, acting as an LFO (low-frequency oscillator) to alter the sound dynamically.
+
+Phase 2: Expanding the Concept
+As we progressed, we realized the potential of modifying both the interaction method and the sound output. To deepen our exploration, each team member developed their own unique hand-controlled instrument, leading to a final collaborative orchestra performance, which we named "Conductive Noise Orchestra."
+
+Andrea focused on percussive sounds and effects, using mouth opening and closing to trigger drum beats.
+Ziming designed a system where finger movements controlled multiple sounds, creating complex textures.
+Javi developed a mixing table where two index fingers controlled track transitions, adjusting volume (Y-axis) and playback speed (X-axis).
+
+Final Performance: Visual & Sound Integration
+To enhance the live experience, we implemented real-time reactive visuals synchronized with the sounds. This turned our performance into a fully immersive audio-visual piece, blending generative art with interactive music.
+
+Our Conductive Noise Orchestra demonstrated how hand gestures could transform digital instruments into expressive tools, blurring the lines between body movement, technology, and sound composition.
